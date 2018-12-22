@@ -1,0 +1,12 @@
+{
+    "api_port": "",
+    "mongodb": {
+        "host": "",
+        "user": "",
+        "pass": "",
+        "auth_db": ""
+    },
+    "tokens": [
+        ""
+    ]
+}
