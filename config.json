@@ -6,6 +6,9 @@
         "pass": "",
         "auth_db": ""
     },
+    "blacklisted_dbs": [
+        ""
+    ],
     "tokens": [
         ""
     ]

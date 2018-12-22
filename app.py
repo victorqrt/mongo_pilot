@@ -26,7 +26,7 @@ def restrain_db_access(f):
     """We want to disallow access to some dbs from the routes"""
     @wraps(f)
     def check_args(*args, **kwargs):
-        if kwargs["db"] in ["admin", "config", "local"]:
+        if kwargs["db"] in conf["blacklisted_dbs"]:
             return jsonify("Access denied.")
 
         return f(*args, **kwargs)
