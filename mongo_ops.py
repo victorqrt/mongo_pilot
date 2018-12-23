@@ -52,6 +52,15 @@ class MongoOps:
             res = "Invalid request filter."
         return res
 
+    def update_documents_by_filter(self, db, coll, req_json):
+        try:
+            _filter = objectify_ids(req_json["filter"])
+            update_op = objectify_ids(req_json["op"])
+            res = self.client[db][coll].update_many(_filter, update_op).raw_result
+        except:
+            res = "Invalid request filter."
+        return res
+
 def deserialize_oids(document):
     """Flask cannot serialize "ObjectID" type fields, so we recursively stringify them"""
     if isinstance(document, list):
@@ -65,7 +74,6 @@ def deserialize_oids(document):
             deserialize_oids(v)
 
     return document
-
 
 def objectify_ids(document):
     """Incoming filters will contain ObjectIds as strings"""

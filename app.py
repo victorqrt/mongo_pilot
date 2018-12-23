@@ -72,3 +72,9 @@ def custom_filter_route(db, coll):
 @restrain_db_access
 def insert_document(db, coll):
     return jsonify(mops.insert_document(db, coll, request.get_json()))
+
+@app.route("/<db>/<coll>/update", strict_slashes=False, methods=["POST"])
+@require_api_token
+@restrain_db_access
+def update_documents(db, coll):
+    return jsonify(mops.update_documents_by_filter(db, coll, request.get_json()))
