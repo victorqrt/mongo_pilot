@@ -47,7 +47,7 @@ The API will not allow access to DBs that are specified in the `blacklisted_dbs`
     - `/<db>/<coll>/insert` (POST)
       Inserts a document in the specified collection.
       The document is to be sent in the request payload's `document` JSON field.
-    
+
     - `/<db>/<coll>/update` (POST)
       Updates documents in the specified collection.
       The mongoDB update operation specified in the `op` field of the request data will be applied to all
@@ -58,3 +58,7 @@ The API will not allow access to DBs that are specified in the `blacklisted_dbs`
 
     - `/<db>/<coll>/oid/<doc_oid>/delete` (GET)
       Deletes the document corresponding to the specified ObjectId (if it exists).
+
+    - `/<db>/<coll>/oid/<doc_oid>/update` (POST)
+      Performs an update operation on the document corresponding to the specified ObjectId. The operation
+      is to be specified as the `op` field of the payload.
