@@ -62,3 +62,8 @@ The API will not allow access to DBs that are specified in the `blacklisted_dbs`
     - `/<db>/<coll>/oid/<doc_oid>/update` (POST)
       Performs an update operation on the document corresponding to the specified ObjectId. The operation
       is to be specified as the `op` field of the payload.
+
+- Misc
+
+    - Passing the `?nocache` parameter to the query string will send back a response containing a
+      `Cache-Control` header to avoid caching from your client when performing the same query multiple times.

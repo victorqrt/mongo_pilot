@@ -1,7 +1,7 @@
 import json
 from functools import wraps
 from mongo_ops import MongoOps
-from flask import Flask, jsonify, request
+from flask import Flask, request, make_response
 
 # Global conf
 
@@ -32,6 +32,13 @@ def restrain_db_access(f):
         return f(*args, **kwargs)
 
     return check_args
+
+def jsonify(_json):
+    resp = make_response(json.dumps(_json))
+    resp.headers["Content-Type"] = "application/json"
+    if "nocache" in request.args:
+        resp.headers["Cache-Control"] = "no-cache, no-store"
+    return resp
 
 # API endpoints routes
 
