@@ -67,3 +67,6 @@ The API will not allow access to DBs that are specified in the `blacklisted_dbs`
 
     - Passing the `?nocache` parameter to the query string will send back a response containing a
       `Cache-Control` header to avoid caching from your client when performing the same query multiple times.
+
+WSGI
+----

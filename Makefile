@@ -8,3 +8,6 @@ env:
 clean:
 	chmod -x run
 	rm -fr env __pycache__
+
+wsgi: all
+	. env/bin/activate && pip install uwsgi
