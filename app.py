@@ -7,7 +7,7 @@ from flask import Flask, request, make_response
 
 conf = json.loads(open("config.json").read())
 mops = MongoOps(conf)
-app = Flask(__name__)
+application = Flask(__name__)
 
 # Some basic security
 
@@ -42,13 +42,13 @@ def jsonify(_json):
 
 # API endpoints routes
 
-@app.route("/")
+@application.route("/")
 @require_api_token
 def main_route():
     return jsonify(mops.get_dbs())
 
-@app.route("/<db>", strict_slashes=False)
-@app.route("/<db>/<coll>", strict_slashes=False)
+@application.route("/<db>", strict_slashes=False)
+@application.route("/<db>/<coll>", strict_slashes=False)
 @require_api_token
 @restrain_db_access
 def db_route(db="", coll=None):
@@ -57,19 +57,19 @@ def db_route(db="", coll=None):
     else:
         return jsonify(mops.get_coll_docs(db, coll))
 
-@app.route("/<db>/<coll>/oid/<doc_oid>", strict_slashes=False)
+@application.route("/<db>/<coll>/oid/<doc_oid>", strict_slashes=False)
 @require_api_token
 @restrain_db_access
 def document_by_oid_route(db, coll, doc_oid):
     return jsonify(mops.get_document_by_oid(db, coll, doc_oid))
 
-@app.route("/<db>/<coll>/oid/<doc_oid>/delete", strict_slashes=False)
+@application.route("/<db>/<coll>/oid/<doc_oid>/delete", strict_slashes=False)
 @require_api_token
 @restrain_db_access
 def del_document_by_oid(db, coll, doc_oid):
     return jsonify(mops.delete_by_oid(db, coll, doc_oid))
 
-@app.route("/<db>/<coll>/oid/<doc_oid>/update", strict_slashes=False, methods=["POST"])
+@application.route("/<db>/<coll>/oid/<doc_oid>/update", strict_slashes=False, methods=["POST"])
 @require_api_token
 @restrain_db_access
 def update_document_by_oid(db, coll, doc_oid):
@@ -79,19 +79,19 @@ def update_document_by_oid(db, coll, doc_oid):
         {"filter": {"_id": doc_oid}, "op": request.get_json()["op"]}
     ))
 
-@app.route("/<db>/<coll>/custom_filter", strict_slashes=False, methods=["POST"])
+@application.route("/<db>/<coll>/custom_filter", strict_slashes=False, methods=["POST"])
 @require_api_token
 @restrain_db_access
 def custom_filter_route(db, coll):
     return jsonify(mops.custom_find_filter(db, coll, request.get_json()))
 
-@app.route("/<db>/<coll>/insert", strict_slashes=False, methods=["POST"])
+@application.route("/<db>/<coll>/insert", strict_slashes=False, methods=["POST"])
 @require_api_token
 @restrain_db_access
 def insert_document(db, coll):
     return jsonify(mops.insert_document(db, coll, request.get_json()))
 
-@app.route("/<db>/<coll>/update", strict_slashes=False, methods=["POST"])
+@application.route("/<db>/<coll>/update", strict_slashes=False, methods=["POST"])
 @require_api_token
 @restrain_db_access
 def update_documents(db, coll):
