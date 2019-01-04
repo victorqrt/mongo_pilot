@@ -29,25 +29,26 @@ class MongoOps:
             })
         )
 
-    def delete_by_oid(self, db, coll, oid):
-        self.client[db][coll].delete_one({
-            "_id": ObjectId(oid)
-        })
-
-        return "Document with oid " + oid +" deleted (if found)."
-
-    def insert_document(self, db, coll, req_json):
+    def insert_documents(self, db, coll, req_json):
         try:
-            _id = self.client[db][coll].insert_one(req_json["document"]).inserted_id
-            res = "Inserted document " + str(_id) + "."
+            _ids = self.client[db][coll].insert_many(objectify_ids(req_json["documents"])).inserted_ids
+            res = list(map(lambda x: "Inserted document at ObjectId " + str(x), _ids))
         except:
-            res = "Invalid document."
+            res = "Insert failed; are all documents valid ?"
         return res
 
     def custom_find_filter(self, db, coll, req_json):
         try:
             _filter = objectify_ids(req_json["filter"])
             res = deserialize_oids(list(self.client[db][coll].find(_filter)))
+        except:
+            res = "Invalid request filter."
+        return res
+
+    def delete_documents_by_filter(self, db, coll, req_json):
+        try:
+            _filter = objectify_ids(req_json["filter"])
+            res = "Deleted " + str(self.client[db][coll].delete_many(_filter).deleted_count) + " documents."
         except:
             res = "Invalid request filter."
         return res
