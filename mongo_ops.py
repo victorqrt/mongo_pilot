@@ -52,13 +52,15 @@ class MongoOps:
             res = "Invalid request filter."
         return res
 
-    def update_documents_by_filter(self, db, coll, req_json):
-        try:
-            _filter = objectify_ids(req_json["filter"])
-            update_op = objectify_ids(req_json["op"])
-            res = self.client[db][coll].update_many(_filter, update_op).raw_result
-        except:
-            res = "Invalid request filter."
+    def update_many_documents_by_filter(self, db, coll, req_json):
+        res = []
+        for update in req_json["updates"]:
+            try:
+                _filter = objectify_ids(update["filter"])
+                update_op = objectify_ids(update["op"])
+                res.append(self.client[db][coll].update_many(_filter, update_op).raw_result)
+            except:
+                res.append("Invalid request filter.")
         return res
 
 def deserialize_oids(document):

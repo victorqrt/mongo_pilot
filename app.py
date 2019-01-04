@@ -73,11 +73,11 @@ def del_document_by_oid(db, coll, doc_oid):
 @require_api_token
 @restrain_db_access
 def update_document_by_oid(db, coll, doc_oid):
-    return jsonify(mops.update_documents_by_filter(
+    return jsonify(mops.update_many_documents_by_filter(
         db,
         coll,
-        {"filter": {"_id": doc_oid}, "op": request.get_json()["op"]}
-    ))
+        {"updates": [{"filter": {"_id": doc_oid}, "op": request.get_json()["op"]}]}
+    )[0])
 
 @application.route("/<db>/<coll>/custom_filter", strict_slashes=False, methods=["POST"])
 @require_api_token
@@ -95,4 +95,4 @@ def insert_document(db, coll):
 @require_api_token
 @restrain_db_access
 def update_documents(db, coll):
-    return jsonify(mops.update_documents_by_filter(db, coll, request.get_json()))
+    return jsonify(mops.update_many_documents_by_filter(db, coll, request.get_json()))
