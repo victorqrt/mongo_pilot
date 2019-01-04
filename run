@@ -4,7 +4,7 @@ API_PORT=$(sed 's/^.*"api_port": \(.*\),/\1/;t;d' config.json)
 
 case $1 in
     flask) FLASK_APP=app.py; CMD="flask run --host 0.0.0.0 --port $API_PORT";;
-    wsgi) CMD="uwsgi --http :$API_PORT --wsgi-file app.py";;
+    wsgi) CMD="uwsgi --http :$API_PORT --wsgi-file app.py --limit-post 0";;
     *) echo "Usage: $0 (flask|wsgi)"; exit 127;;
 esac
 
