@@ -12,7 +12,8 @@ class MongoOps:
                 + "@"
                 + conf["mongodb"]["host"]
                 + "/"
-                + conf["mongodb"]["auth_db"]
+                + conf["mongodb"]["auth_db"],
+                connect=False
             )
 
     # Some basic mongoDB functions

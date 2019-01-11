@@ -1,5 +1,6 @@
 {
     "api_port": ,
+    "uwsgi_workers": ,
     "mongodb": {
         "host": "",
         "user": "",

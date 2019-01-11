@@ -33,6 +33,8 @@ def restrain_db_access(f):
 
     return check_args
 
+# Cache control
+
 def jsonify(_json):
     resp = make_response(json.dumps(_json))
     resp.headers["Content-Type"] = "application/json"
