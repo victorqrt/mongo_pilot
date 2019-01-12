@@ -76,8 +76,7 @@ The API will not allow access to DBs that are specified in the `blacklisted_dbs`
 WSGI
 ----
 
-The API supports deployment through uwsgi for production use, through the http protocol for the moment (uwsgi protocol
-support will be added in the near future).
+The API supports deployment through uwsgi for production use through unix sockets and the uwsgi protocol. This deployment mode is meant to be used with a web server such as nginx.
 
 Run `make wsgi` to prepare the environment for uwsgi deployment. You will need a C compiler such as gcc or clang as well
 as the python headers (the `python3-dev` package on Debian 9 for instance).
