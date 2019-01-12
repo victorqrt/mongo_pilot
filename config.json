@@ -1,18 +1,14 @@
 {
-    "api_port": 28018,
-    "uwsgi_workers": 4,
+    "api_port": ,
+    "uwsgi_workers": ,
     "mongodb": {
-        "host": "ebarthe.tizoo.com",
-        "user": "mongo_user",
-        "pass": "4afTmbCX^jff.,g<",
-        "auth_db": "admin"
+        "host": "",
+        "user": "",
+        "pass": "",
+        "auth_db": ""
     },
     "blacklisted_dbs": [
-        "admin",
-        "config",
-        "local"
     ],
     "tokens": [
-        "UPhMi1DyGl707DW3tZHUVWH1DvUgWCEj"
     ]
 }
