@@ -55,7 +55,7 @@ The API will not allow access to DBs that are specified in the `blacklisted_dbs`
       documents in the collection matching the filter specified in the `filter` field.
       The response will contain the update reports in the same order as in the sent request.
 
-    - `/<db>/<coll>/delete` (GET)
+    - `/<db>/<coll>/delete` (POST)
       Deletes all documents matching the `filter` field in the collection.
 
     - `/<db>/<coll>/oid/<doc_oid>` (GET)
