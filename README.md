@@ -10,7 +10,7 @@ This API comes in handy when you need to perform simple CRUD operations on mongo
 It was designed to avoid using any client driver when accessing the DB (via Excel spreadsheets or scripts
 for instance).
 
-For now, it does not expose endpoints to use the aggregate or map/reduce framework, but it might in the future.
+For now, it does not expose endpoints to use mongoDB's map/reduce functionality, but it might in the future.
 
 Usage
 -----
@@ -67,6 +67,10 @@ The API will not allow access to DBs that are specified in the `blacklisted_dbs`
     - `/<db>/<coll>/oid/<doc_oid>/update` (POST)
       Performs an update operation on the document corresponding to the specified ObjectId. The operation
       is to be specified as the `op` field of the payload.
+
+    - `/<db>/<coll>/aggregate` (POST)
+      Performs an aggregation request on the specified collection. The aggregation pipeline is to be passed
+      as an array in the `pipeline` field of the payload.
 
 - Misc
 

@@ -108,3 +108,9 @@ def update_documents(db, coll):
 @restrain_db_access
 def delete_documents(db, coll):
     return jsonify(mops.delete_documents_by_filter(db, coll, request.get_json()))
+
+@application.route("/<db>/<coll>/aggregate", strict_slashes=False, methods=["POST"])
+@require_api_token
+@restrain_db_access
+def aggregate_route(db, coll):
+    return jsonify(mops._aggregate(db, coll, request.get_json()))

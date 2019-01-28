@@ -65,6 +65,13 @@ class MongoOps:
                 res.append("Invalid request filter.")
         return res
 
+    def _aggregate(self, db, coll, req_json):
+        try:
+            res = deserialize_oids(list(self.client[db][coll].aggregate(req_json["pipeline"])))
+        except:
+            res = "Invalid aggregation pipeline."
+        return res
+
 def deserialize_oids(document):
     """Flask cannot serialize "ObjectID" type fields, so we recursively stringify them"""
     if isinstance(document, list):
