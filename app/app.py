@@ -5,7 +5,7 @@ from flask import Flask, request, make_response
 
 # Global conf
 
-conf = json.loads(open("config.json").read())
+conf = json.loads(open("../config.json").read())
 mops = MongoOps(conf)
 application = Flask(__name__)
 

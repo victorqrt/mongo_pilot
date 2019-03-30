@@ -1,4 +1,4 @@
-import json
+import app, json
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
@@ -18,7 +18,12 @@ class MongoOps:
 
     # Some basic mongoDB functions
 
-    get_dbs = lambda self: self.client.database_names()
+    get_dbs = lambda self: list(
+        filter(
+            lambda db: db not in app.conf["blacklisted_dbs"],
+            self.client.database_names()
+        )
+    )
 
     get_db_colls = lambda self, db: self.client[db].collection_names()
 

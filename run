@@ -10,4 +10,5 @@ case $1 in
 esac
 
 . env/bin/activate
+cd app
 exec $CMD

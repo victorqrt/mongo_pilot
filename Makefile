@@ -10,4 +10,4 @@ wsgi: all
 
 clean:
 	chmod -x run
-	rm -fr mongo_pilot.sock env __pycache__
+	rm -fr mongo_pilot.sock env app/__pycache__

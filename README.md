@@ -32,7 +32,7 @@ The API will not allow access to DBs that are specified in the `blacklisted_dbs`
 - Endpoints
 
     - `/` (GET)
-      Lists all DBs on your mongo server instance. Will list blacklisted DBs.
+      Lists all DBs on your mongo server instance. Will not list blacklisted DBs.
 
     - `/<db>` (GET)
       Lists all collections in the specified db.
